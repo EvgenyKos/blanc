@@ -19,7 +19,7 @@ ru_en_train.to_csv(r"ru_en_blanc.csv", index=False)
 
 parallel = pd.read_csv('parallel_ru_en.csv.gz', index_col=0)
 par_sample = parallel.sample(1000)
-par_sample = par_sample.reset_index(drop = True)
+par_sample = par_sample.reset_index(drop=True)
 
 par_sample['score'] = 0
 
