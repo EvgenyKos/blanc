@@ -9,7 +9,7 @@ import torch
 import tqdm
 from transformers import BertForMaskedLM, BertTokenizer, AdamW, get_linear_schedule_with_warmup
 
-from blanc.utils import (
+from utils import (
     BertInput,
     Defaults,
     batch_data,
@@ -396,7 +396,7 @@ class Blanc:
         Returns:
             model (BertForMaskedLM): a BERT for masked language modeling torch model
         """
-        model = BertForMaskedLM.from_pretrained(self.model_name).to(device)
+        model = BertForMaskedLM.from_pretrained('./bert_model/')
         model.eval()
         return model
 
