@@ -75,9 +75,10 @@ class Blanc:
         Returns:
             score (float): The BLANC score for the input
         """
-        (doc_score,) = self.eval_summaries_for_docs([doc], [[summary]])
+        (doc_score, total_unks) = self.eval_summaries_for_docs([doc], [[summary]])
         (score,) = doc_score
-        return score
+
+        return score, total_unks
 
     def eval_pairs(self, docs, summaries):
         """Calculate the BLANC score for multiple docs, each with a single summary
@@ -88,9 +89,9 @@ class Blanc:
             scores (List[float]): The BLANC scores for the inputs
         """
         doc_summaries = [[summary] for summary in summaries]
-        full_scores = self.eval_summaries_for_docs(docs, doc_summaries)
+        full_scores, total_unks = self.eval_summaries_for_docs(docs, doc_summaries)
         scores = [score for score, in full_scores]
-        return scores
+        return scores, total_unks
 
     def eval_summaries_for_docs(self, docs, doc_summaries):
         """Calculate the BLANC score for multiple docs, each with multiple summaries
@@ -348,9 +349,9 @@ class Blanc:
                 if the measure is 'relative-counts' or 'improve-counts'.
         """
         print('Base output')
-        base_correctness = determine_correctness(base_output, base_answers)
+        base_correctness, _ = determine_correctness(base_output, base_answers)
         print('Assited output')
-        assisted_correctness = determine_correctness(assisted_output, assisted_answers)
+        assisted_correctness, cnt_unks = determine_correctness(assisted_output, assisted_answers)
 
         S = [[0, 0], [0, 0]]
         for base_correct, assisted_correct in zip(base_correctness, assisted_correctness):
@@ -368,7 +369,7 @@ class Blanc:
         else:
             raise NotImplementedError(f'unknown measure {self.measure}')
 
-        return result
+        return result, cnt_unks
 
     def init_model(self, device):
         """Initialize the language model and send it to the given device
@@ -379,10 +380,10 @@ class Blanc:
         """
         if self.base == 1:
             model = BertForMaskedLM.from_pretrained(self.model_name).to(device)
-            print('using base model')
+            print('Using base model')
         else:
             model = BertForMaskedLM.from_pretrained('./bert_model/').to(device)
-            print('using furhter trained model')
+            print('Using furhter trained model')
         model.eval()
         return model
 
@@ -433,9 +434,10 @@ class BlancHelp(Blanc):
         all_outputs, all_answers = self.mask_and_infer(
             self.model, docs, doc_summaries, sep=self.help_sep
         )
-
+        total_unks = 0
         all_scores = []
         for doc_outputs, doc_answers in zip(all_outputs, all_answers):
+            dock_unks = 0
             doc_scores = []
             for summary_output, summary_answers in zip(doc_outputs, doc_answers):
                 help_output = [out for i, out in enumerate(summary_output) if i % 2 == 0]
@@ -443,11 +445,13 @@ class BlancHelp(Blanc):
                 help_answers = [answer for i, answer in enumerate(summary_answers) if i % 2 == 0]
                 filler_answers = [answer for i, answer in enumerate(summary_answers) if i % 2 == 1]
 
-                score = self.judge_output(filler_output, help_output, filler_answers, help_answers)
+                score, cnt_unks = self.judge_output(filler_output, help_output, filler_answers, help_answers)
                 doc_scores.append(score)
+                dock_unks += cnt_unks
             all_scores.append(doc_scores)
+            total_unks += dock_unks
 
-        return all_scores
+        return all_scores, total_unks
 
     def get_inputs_for_sentence(self, sent_tokens, summary_tokens):
         """Get inference inputs corresponding to a given sentence. For BLANC-help, we get several
