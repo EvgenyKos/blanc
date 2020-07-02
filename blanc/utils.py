@@ -271,14 +271,17 @@ def determine_correctness(outputs, answers):
             prediction and False otherwise
     """
     correctness = []
+    cnt_unks = 0
     for output, answer in zip(outputs, answers):
 
         for idx, actual_token in answer.items():
             predicted_token = output[idx]
             print(actual_token, "-", predicted_token)
             correctness.append(predicted_token == actual_token)
+            if predicted_token=='[UNK]':
+                cnt_unks += 1
 
-    return correctness
+    return correctness, cnt_unks
 
 
 def measure_relative(S):
