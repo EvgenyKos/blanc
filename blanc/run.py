@@ -80,7 +80,10 @@ parser.add_argument(
 args = parser.parse_args()
 
 
-ru_en_train = pd.read_csv('ru-en/train.ruen.df.short.tsv', sep='\t', header=0)
+ru_en_train = pd.read_csv('train.ruen.df.short.tsv', sep='\t', header=0)
+# ru_en_train = ru_en_train.sample(100)
+# ru_en_train = ru_en_train.reset_index(drop=True)
+
 print(ru_en_train.head())
 
 blanc_help = BlancHelp(gap=args.gap,
@@ -94,7 +97,9 @@ blanc_help = BlancHelp(gap=args.gap,
 
 if args.type == 'standard':
 
-    score = blanc_help.eval_pairs(ru_en_train.original, ru_en_train.translation)
+    score, total_unks = blanc_help.eval_pairs(ru_en_train.original, ru_en_train.translation)
+
+    print("Total number of UNKs: ", total_unks)
 
     ru_en_train['score'] = score
 
@@ -103,7 +108,7 @@ if args.type == 'standard':
 
 # For random shuffle
 elif args.type == 'shuffle':
-
+    t_unks = 0
     for i in range(len(ru_en_train)):
 
         # shuffle words in a sentences
@@ -114,16 +119,17 @@ elif args.type == 'shuffle':
 
         document = ru_en_train.original[i]
 
-        blanc_score = blanc_help.eval_once(document, summary)
+        blanc_score, total_unks = blanc_help.eval_once(document, summary)
         ru_en_train.loc[i, 'score'] = blanc_score
-
+        t_unks += total_unks
+    print("Total number of UNKs: ", t_unks)
     ru_en_train.to_csv(args.output_name + ".csv", sep=',', index=False)
 
 # For random words replacement
 elif args.type == 'replace':
 
     word_list = words.words()
-
+    t_unks = 0
     for i in range(len(ru_en_train)):
 
         # shuffle words in a sentences
@@ -164,19 +170,20 @@ elif args.type == 'replace':
 
         document = ru_en_train.original[i]
 
-        blanc_score = blanc_help.eval_once(document, summary)
-        print(blanc_score)
+        blanc_score, total_unks = blanc_help.eval_once(document, summary)
+        t_unks += total_unks
+        print("Blanc score: ", blanc_score)
         ru_en_train.loc[i, 'score'] = blanc_score
-
+    print("Total number of UNKs: ", t_unks)
     ru_en_train.to_csv(args.output_name + ".csv", sep=',', index=False)
 
 # Set translation as document
 elif args.type == 'oposite':
-    score = blanc_help.eval_pairs(ru_en_train.translation, ru_en_train.original)
+    score, total_unks = blanc_help.eval_pairs(ru_en_train.translation, ru_en_train.original)
 
     ru_en_train['score'] = score
 
     ru_en_train.to_csv(args.output_name + ".csv", sep=',', index=False)
-
+    print("Total number of UNKs: ", total_unks)
 else:
     print('Uknown option. Please read documentation')
