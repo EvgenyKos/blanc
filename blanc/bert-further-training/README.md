@@ -1,4 +1,4 @@
-#BERT-further-pretrainig 
+## BERT-further-pretrainig 
 
 The code is used to pre train DistilBert model on Russian-English corpus. For that Yandex dataset (https://translate.yandex.ru/corpus?lang=en) was used. You will also need to install the HuggingFace libraries for AutoModel: https://huggingface.co/transformers/model_doc/auto.html. 
 
