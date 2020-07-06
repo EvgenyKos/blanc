@@ -140,7 +140,7 @@ elif args.type == 'replace':
         attempt = 0
         status = True
 
-        while cnt <= args.n_tokens:
+        while cnt < args.n_tokens:
 
             random.shuffle(word_list)
             n = random.randint(0, len(sen_words)-1)
