@@ -7,7 +7,7 @@ Steps:
 
 2. Calculate the relative score by executing python run.py
 
-Full documentation with python run.py 
+Full documentation with `python run.py` 
 
     arguments:
 
