@@ -1,12 +1,18 @@
-## BLANC extention into machine translation quality estimation
+# BLANC extention into machine translation quality estimation
 
-This is the extenstion of BLANC-help into machine translation quality estimation. 
+This is the extenstion of BLANC-help into machine translation quality estimation. Original BLANC version is applied on evaluating the quality of text summarization. I used original senetnce (Russian language) as a document and translation (English language) as a summary to calculate the relative score. Our assumption was that a model should predict more accurately with the translation rathen than with a filler. To get the scores I tested 3 models: bert-base-multilingual-uncased, bert-base-multilingual-cased and further pretrained Bert base uncased model. Further pretrained Bert model did not improve the results beyond the base model. It was tested on multiple pretrained Bert models with different hyperparameters. At the same time "cased" base model predicted 12 times more [UNK] tokens. During the initial testing it was uncovered that Bert was masking [UNK] tokens. It does not give practical reasons to predict words that are unknown in masked sentences. Therefore, I removed [UNK] tokens from masking.   
 
-Steps:
+## Instructions
+
 1. Download the data https://www.quest.dcs.shef.ac.uk/wmt20_files_qe/ru-en.tar.gz and extract into directory.
 
-2. Calculate the relative score by executing python run.py
+2. Calculate the relative score by executing `python run.py`.
 
+3. Evaluate the results using notebook `blanc_data_analysis.ipynb`.
+   
+   The highest Pearson correlation was ~0.18 while original BLANC paper had ~0.36. My highest correlation was achived on gap = 2, min_token_length_normal = 4,                  
+   min_token_length_lead = 5 
+   
 Full documentation with `python run.py` 
 
     arguments:
