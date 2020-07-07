@@ -1,9 +1,10 @@
 ## BERT-further-pretrainig 
 
-The code is used to pre train Bert model on Russian-English corpus. For that Yandex dataset (https://translate.yandex.ru/corpus?lang=en) was used. You will also need to install the HuggingFace libraries for AutoModel: https://huggingface.co/transformers/model_doc/auto.html. 
+The code is used to further pretrain Bert model on Russian-English corpus. For that Yandex dataset (https://translate.yandex.ru/corpus?lang=en) was used. You will also need to install the HuggingFace libraries for AutoModel: https://huggingface.co/transformers/model_doc/auto.html. 
 
 
 Steps:
+
 1. Download and extract corpuses into directory. Create new enviroment and install requirements.txt
 
    1.1. pip install -r requirements.txt
