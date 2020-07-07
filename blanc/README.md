@@ -7,11 +7,20 @@ This is the extenstion of BLANC-help into machine translation quality estimation
 1. Download the data https://www.quest.dcs.shef.ac.uk/wmt20_files_qe/ru-en.tar.gz and extract into directory.
 
 2. Calculate the relative score by executing `python run.py`.
+   
+   I used the following specification to achive the hisgest score:
+   
+   model_name = 'bert-base-multilingual-uncased',
+   
+   gap = 2,
+   
+   min_token_length_normal = 4, 
+   
+   min_token_length_lead = 5 
 
 3. Evaluate the results using notebook `blanc_data_analysis.ipynb`.
    
-   The highest Pearson correlation was ~0.18 while original BLANC paper had ~0.36. My highest correlation was achived on gap = 2, min_token_length_normal = 4,                  
-   min_token_length_lead = 5 
+   The highest Pearson correlation was ~0.18 while original BLANC paper had ~0.36. My highest correlation was achived on 
    
 Full documentation with `python run.py` 
 
