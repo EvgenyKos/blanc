@@ -1,9 +1,9 @@
-## BERT-further-pretrainig 
+# BERT-further-pretrainig 
 
-The code is used to further pretrain Bert model on Russian-English corpus. For that Yandex dataset (https://translate.yandex.ru/corpus?lang=en) was used. You will also need to install the HuggingFace libraries for AutoModel: https://huggingface.co/transformers/model_doc/auto.html. 
+The code is used to further pretrain Bert model on Russian-English corpus. For that Yandex dataset (https://translate.yandex.ru/corpus?lang=en) was used. You will also need to install the HuggingFace libraries for AutoModel: https://huggingface.co/transformers/model_doc/auto.html. The model was intialized with AutoModelWithLMHead instead of BertForMaskedLM (BMLM) on 'bert-base-multilingual-uncased'. I used AutoModel because BMLM was overfitting and predicting the same tokens even after training on 1 epoch. `encode_plus` [tokenizer](https://huggingface.co/transformers/main_classes/tokenizer.html) with inserting special tokens, generating apdding and generating segment ids. For labeling I used `input_ids` and assigned value -100 to special tokens. Without it it was predicting [PAD] tokens.      
 
 
-Steps:
+## Instructions
 
 1. Download and extract corpuses into directory. Create new enviroment and install requirements.txt
 
