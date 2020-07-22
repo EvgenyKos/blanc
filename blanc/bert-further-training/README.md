@@ -5,9 +5,10 @@ The code is used to further pretrain Bert model on Russian-English corpus. For t
 
 ## Instructions
 
-1. Download and extract corpuses into directory. Create new enviroment and install requirements.txt
+1. Download and extract corpuses into directory. Create new enviroment and install requirements.txt. Prepare the data.
 
    1.1. pip install -r requirements.txt
+   1.2. python3 data_prep.py
 
 2. Training
 
