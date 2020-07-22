@@ -4,7 +4,7 @@ This is an extension of BLANC-help into machine translation quality estimation. 
 
 ## Instructions
 
-1. Download the data https://www.quest.dcs.shef.ac.uk/wmt20_files_qe/ru-en.tar.gz and extract into directory.
+1. Download the data https://www.quest.dcs.shef.ac.uk/wmt20_files_qe/ru-en.tar.gz and extract into blanc_mt directory.
 
 2. Calculate the relative score by executing `python run.py`.
    
