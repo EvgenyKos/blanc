@@ -18,7 +18,7 @@ parser.add_argument('--size', dest='s_size', type=int,
 parser.add_argument('--batch', dest='batch_size', type=int,
                     default=32, help='Select batch size. Default 32')
 parser.add_argument('--epochs', dest='n_epochs', type=int,
-                    default=2, help='Select number of epochs. Default 2')
+                    default=1, help='Select number of epochs. Default 2')
 
 args = parser.parse_args()
 
