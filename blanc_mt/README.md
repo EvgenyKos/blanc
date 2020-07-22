@@ -8,7 +8,7 @@ This is an extension of BLANC-help into machine translation quality estimation. 
 
 2. Calculate the relative score by executing `python run.py`.
    
-   I used the following specification to achive the hisgest score:
+   I used the following specification to achive the highest score:
    
    model_name = 'bert-base-multilingual-uncased',
    
