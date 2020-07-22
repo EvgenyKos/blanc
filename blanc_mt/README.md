@@ -10,13 +10,13 @@ This is an extension of BLANC-help into machine translation quality estimation. 
    
    I used the following specification to achive the highest score:
    
-   model_name = 'bert-base-multilingual-uncased',
+   `model_name = 'bert-base-multilingual-uncased'`,
    
-   gap = 2,
+   `gap = 2`,
    
-   min_token_length_normal = 4, 
+   `min_token_length_normal = 4`, 
    
-   min_token_length_lead = 5. 
+   `min_token_length_lead = 5`. 
    
    To get the scores on the randomaly shuffled translations sentences and translations with randomly replaced words specify the 'type' (view the documentation below). 
 
