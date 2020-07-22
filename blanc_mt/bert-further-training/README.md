@@ -5,27 +5,30 @@ The code is used to further pretrain Bert model on Russian-English corpus. For t
 
 ## Instructions
 
-1. Download and extract corpuses into directory. Create new enviroment and install requirements.txt. Prepare the data.
+1. Download and extract corpuses into bert-further-training directory. Create new enviroment and install requirements.txt. 
 
    1.1. `pip install -r requirements.txt`
    
-   1.2. `python3 data_prep.py`
+   1.2. Prepare the data by executing `python3 data_prep.py`. A file `yandex_parallel.csv` will be saved into your directory. 
 
-2. Training
-
-   2.1. Specicy GPU (default 0). For CPU type --GPU -1
-   
-        python3 train.py --GPU 2
-      
-      
-   2.2. Specify batch size (default 32)
-      
-        python3 train.py --batch 64
-      
-   2.3. Specify number of epochs (default 2)
-      
-        python3 dtrain.py --epochs 5
+2. Further train Bert model by executing `python train.py`. View the documentation below. 
 
 The code creates directory directory '/bert_model/' if not exists and saves model there. 
+
+Full documentation with `python train.py`: 
+
+    arguments:
+
+    -- GPU NUMBER         cpu (-1) or cuda device (0 or more if multiple gpu's available)
+                          (default: 0)
+                        
+    --smp SAMPLE          use data sample or not. (default: False)
+
+    --size SAMPLE_SIZE    sample size if True for sample (default: 100)
+                        
+    --batch SIZE          batch size for training (default: 32)
+                        
+    --epochs EPOCHS       number of epochs to train (default: 2)
+  
 
 
