@@ -8,7 +8,7 @@ This is an extension of BLANC-help into machine translation quality estimation. 
 
 2. Calculate the relative score by executing `python run.py`.
    
-   I used the following specification to achive the highest score:
+   I used the following specification (dafault values) to achive the highest score:
    
    `model_name = 'bert-base-multilingual-uncased'`,
    
@@ -35,7 +35,7 @@ Full documentation with `python run.py`:
     --model_name NAME     BERT model type (default: bert-base-multilingual-uncased)
 
     --gap GAP             distance between words to mask during inference
-                          (default: 6)
+                          (default: 2)
                         
     --min_token_length_normal LEN
                           minimum number of chars in normal tokens to mask,
@@ -43,7 +43,7 @@ Full documentation with `python run.py`:
                         
     --min_token_length_lead LEN
                           minimum number of chars in lead token to mask, where a
-                          lead token begins a word (default: 2)
+                          lead token begins a word (default: 5)
                         
     --min_token_length_followup LEN
                           minimum number of chars in followup token to mask,
