@@ -16,11 +16,27 @@ def format_time(elapsed):
 
 
 def remove_char_en(s):
+    '''Replaces all characters in a English string, except specified in brackets, with a space.
+    
+    Args:
+         s (str): a sequence of characters ( words or sentences).
+         
+    Returns:
+         s (str): updated string without unwanted characters. 
+    '''
     s = re.sub(r'[^a-zA-Z0-9]+', " ", s)
     return s
 
 
 def remove_char_ru(s):
+    '''Replaces all characters in a Russian string, except specified in brackets, with a space. 
+    
+     Args:
+         s (str): a sequence of characters ( words or sentences).
+         
+    Returns:
+         s (str): updated string without unwanted characters. 
+    '''
     s = re.sub(r'[^А-яЁё0-9]+', " ", s)
     return s
 
