@@ -42,6 +42,14 @@ def remove_char_ru(s):
 
 
 def language_type(sentence):
+    '''Detects what language the sentence and returns the code of the detected language.
+    
+    Args:
+         sentence (str): a sentence or multiple sentences. 
+         
+    Returns:
+         language code if detected. 
+    '''
     try:
         detector = Detector(sentence)
     except:
