@@ -348,9 +348,7 @@ class Blanc:
             score, S (tuple of float and list): the BLANC score and counts,
                 if the measure is 'relative-counts' or 'improve-counts'.
         """
-        print('Base output')
         base_correctness, _ = determine_correctness(base_output, base_answers)
-        print('Assited output')
         assisted_correctness, cnt_unks = determine_correctness(assisted_output, assisted_answers)
 
         S = [[0, 0], [0, 0]]
