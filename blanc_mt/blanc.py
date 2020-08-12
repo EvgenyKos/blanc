@@ -350,6 +350,13 @@ class Blanc:
         """
         base_correctness, _ = determine_correctness(base_output, base_answers)
         assisted_correctness, cnt_unks = determine_correctness(assisted_output, assisted_answers)
+        
+        for i in range(len(base_answers)):
+            bas_ans = base_answers[i]
+            for key, value in bas_ans.items():
+                assist_out = assisted_output[i]
+                base_out = base_output[i]
+                print(key, '--', value, '--', assist_out.get(key, 0), '--', base_out.get(key, 0))
 
         S = [[0, 0], [0, 0]]
         for base_correct, assisted_correct in zip(base_correctness, assisted_correctness):
