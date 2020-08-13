@@ -59,6 +59,15 @@ def language_type(sentence):
 
 
 def prepare_data(english_corpus, russian_corpus):
+    '''Takes two parallel corpuses, concatenates them and returns a dataframe.
+    
+    Args:
+         english_corpus: text file with english corpus.
+         russian_corpus: text file with russian corpus. 
+         
+    Returns:
+         dataframe of concatenated corpuses. 
+    '''
 
     f1 = open(english_corpus, encoding="utf8")
     d1 = f1.readlines()
@@ -81,6 +90,17 @@ def prepare_data(english_corpus, russian_corpus):
 
 
 def apply_filters(df, ru, en):
+    '''Removes all characters but letters and numbers from sentences in the dataframe.
+       Removes datapoints that do not match the expected language. 
+    
+    Args:
+         df: dataframe 
+         ru : dataframe column with russian sentences.
+         en: dataframe column with english sentences. 
+         
+    Returns:
+         modified and filtered dataframe. 
+    '''
 
     df[en] = df[en].apply(remove_char_en)
     df[ru] = df[ru].apply(remove_char_ru)
@@ -102,9 +122,16 @@ def apply_filters(df, ru, en):
 
 
 def custom_replace(tensor):
+    '''Replaces special tokens with value -100.
+    
+    Args:
+         tensor: tensor of tokenized text. 
+         
+    Returns:
+         res: tensor with replaced special tokens. 
+    '''
     res = tensor.clone()
     res[tensor == 0] = -100
     res[tensor == 101] = -100
     res[tensor == 102] = -100
-    res[tensor == 119] = -100
     return res
