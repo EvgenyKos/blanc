@@ -388,7 +388,7 @@ class Blanc:
             print('Using base model')
         else:
             model = BertForMaskedLM.from_pretrained('./bert_model/').to(device)
-            print('Using furhter trained model')
+            print('Using further pretrained BERT model')
         model.eval()
         return model
 
