@@ -6,7 +6,9 @@ This is an extension of BLANC-help into machine translation quality estimation. 
 
 1. Download the data https://www.quest.dcs.shef.ac.uk/wmt20_files_qe/ru-en.tar.gz and extract into blanc_mt directory.
 
-2. Calculate the relative score by executing `python run.py`.
+2. Install `requirements.txt`
+
+3. Calculate the relative score by executing `python run.py`.
    
    I used the following specification (dafault values) to achive the highest score:
    
@@ -20,7 +22,7 @@ This is an extension of BLANC-help into machine translation quality estimation. 
    
    To get the scores on the randomaly shuffled translations sentences and translations with randomly replaced words specify the 'type' (view the documentation below). 
 
-3. Evaluate the results using notebook `blanc_data_analysis.ipynb`.
+4. Evaluate the results using notebook `blanc_data_analysis.ipynb`.
    
    The highest Pearson correlation was ~0.18 while original BLANC paper had ~0.36. Please, review the notebook for more results.  
    
