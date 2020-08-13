@@ -16,7 +16,7 @@ parser.add_argument('--smp', dest='sample', type=bool,
 parser.add_argument('--size', dest='s_size', type=int,
                     default=100, help='Select data sample size. Default 100')
 parser.add_argument('--batch', dest='batch_size', type=int,
-                    default=32, help='Select batch size. Default 32')
+                    default=64, help='Select batch size. Default 32')
 parser.add_argument('--epochs', dest='n_epochs', type=int,
                     default=1, help='Select number of epochs. Default 1')
 
